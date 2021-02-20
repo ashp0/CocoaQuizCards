@@ -1,0 +1,575 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		CFD616ED25E1AD3400CFF4DE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD616EC25E1AD3400CFF4DE /* AppDelegate.swift */; };
+		CFD616EF25E1AD3700CFF4DE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CFD616EE25E1AD3700CFF4DE /* Assets.xcassets */; };
+		CFD616F225E1AD3700CFF4DE /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = CFD616F025E1AD3700CFF4DE /* MainMenu.xib */; };
+		CFD616FE25E1AD3700CFF4DE /* QuizCardsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD616FD25E1AD3700CFF4DE /* QuizCardsTests.swift */; };
+		CFD6170925E1AD3700CFF4DE /* QuizCardsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD6170825E1AD3700CFF4DE /* QuizCardsUITests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		CFD616FA25E1AD3700CFF4DE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CFD616E125E1AD3400CFF4DE /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CFD616E825E1AD3400CFF4DE;
+			remoteInfo = QuizCards;
+		};
+		CFD6170525E1AD3700CFF4DE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CFD616E125E1AD3400CFF4DE /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CFD616E825E1AD3400CFF4DE;
+			remoteInfo = QuizCards;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		CFD616E925E1AD3400CFF4DE /* QuizCards.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QuizCards.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		CFD616EC25E1AD3400CFF4DE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		CFD616EE25E1AD3700CFF4DE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		CFD616F125E1AD3700CFF4DE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		CFD616F325E1AD3700CFF4DE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CFD616F425E1AD3700CFF4DE /* QuizCards.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = QuizCards.entitlements; sourceTree = "<group>"; };
+		CFD616F925E1AD3700CFF4DE /* QuizCardsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = QuizCardsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		CFD616FD25E1AD3700CFF4DE /* QuizCardsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizCardsTests.swift; sourceTree = "<group>"; };
+		CFD616FF25E1AD3700CFF4DE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CFD6170425E1AD3700CFF4DE /* QuizCardsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = QuizCardsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		CFD6170825E1AD3700CFF4DE /* QuizCardsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizCardsUITests.swift; sourceTree = "<group>"; };
+		CFD6170A25E1AD3700CFF4DE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		CFD616E625E1AD3400CFF4DE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CFD616F625E1AD3700CFF4DE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CFD6170125E1AD3700CFF4DE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		CFD616E025E1AD3400CFF4DE = {
+			isa = PBXGroup;
+			children = (
+				CFD616EB25E1AD3400CFF4DE /* QuizCards */,
+				CFD616FC25E1AD3700CFF4DE /* QuizCardsTests */,
+				CFD6170725E1AD3700CFF4DE /* QuizCardsUITests */,
+				CFD616EA25E1AD3400CFF4DE /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		CFD616EA25E1AD3400CFF4DE /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				CFD616E925E1AD3400CFF4DE /* QuizCards.app */,
+				CFD616F925E1AD3700CFF4DE /* QuizCardsTests.xctest */,
+				CFD6170425E1AD3700CFF4DE /* QuizCardsUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		CFD616EB25E1AD3400CFF4DE /* QuizCards */ = {
+			isa = PBXGroup;
+			children = (
+				CFD616EC25E1AD3400CFF4DE /* AppDelegate.swift */,
+				CFD616EE25E1AD3700CFF4DE /* Assets.xcassets */,
+				CFD616F025E1AD3700CFF4DE /* MainMenu.xib */,
+				CFD616F325E1AD3700CFF4DE /* Info.plist */,
+				CFD616F425E1AD3700CFF4DE /* QuizCards.entitlements */,
+			);
+			path = QuizCards;
+			sourceTree = "<group>";
+		};
+		CFD616FC25E1AD3700CFF4DE /* QuizCardsTests */ = {
+			isa = PBXGroup;
+			children = (
+				CFD616FD25E1AD3700CFF4DE /* QuizCardsTests.swift */,
+				CFD616FF25E1AD3700CFF4DE /* Info.plist */,
+			);
+			path = QuizCardsTests;
+			sourceTree = "<group>";
+		};
+		CFD6170725E1AD3700CFF4DE /* QuizCardsUITests */ = {
+			isa = PBXGroup;
+			children = (
+				CFD6170825E1AD3700CFF4DE /* QuizCardsUITests.swift */,
+				CFD6170A25E1AD3700CFF4DE /* Info.plist */,
+			);
+			path = QuizCardsUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		CFD616E825E1AD3400CFF4DE /* QuizCards */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CFD6170D25E1AD3700CFF4DE /* Build configuration list for PBXNativeTarget "QuizCards" */;
+			buildPhases = (
+				CFD616E525E1AD3400CFF4DE /* Sources */,
+				CFD616E625E1AD3400CFF4DE /* Frameworks */,
+				CFD616E725E1AD3400CFF4DE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = QuizCards;
+			productName = QuizCards;
+			productReference = CFD616E925E1AD3400CFF4DE /* QuizCards.app */;
+			productType = "com.apple.product-type.application";
+		};
+		CFD616F825E1AD3700CFF4DE /* QuizCardsTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CFD6171025E1AD3700CFF4DE /* Build configuration list for PBXNativeTarget "QuizCardsTests" */;
+			buildPhases = (
+				CFD616F525E1AD3700CFF4DE /* Sources */,
+				CFD616F625E1AD3700CFF4DE /* Frameworks */,
+				CFD616F725E1AD3700CFF4DE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				CFD616FB25E1AD3700CFF4DE /* PBXTargetDependency */,
+			);
+			name = QuizCardsTests;
+			productName = QuizCardsTests;
+			productReference = CFD616F925E1AD3700CFF4DE /* QuizCardsTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		CFD6170325E1AD3700CFF4DE /* QuizCardsUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CFD6171325E1AD3700CFF4DE /* Build configuration list for PBXNativeTarget "QuizCardsUITests" */;
+			buildPhases = (
+				CFD6170025E1AD3700CFF4DE /* Sources */,
+				CFD6170125E1AD3700CFF4DE /* Frameworks */,
+				CFD6170225E1AD3700CFF4DE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				CFD6170625E1AD3700CFF4DE /* PBXTargetDependency */,
+			);
+			name = QuizCardsUITests;
+			productName = QuizCardsUITests;
+			productReference = CFD6170425E1AD3700CFF4DE /* QuizCardsUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		CFD616E125E1AD3400CFF4DE /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1240;
+				LastUpgradeCheck = 1240;
+				TargetAttributes = {
+					CFD616E825E1AD3400CFF4DE = {
+						CreatedOnToolsVersion = 12.4;
+					};
+					CFD616F825E1AD3700CFF4DE = {
+						CreatedOnToolsVersion = 12.4;
+						TestTargetID = CFD616E825E1AD3400CFF4DE;
+					};
+					CFD6170325E1AD3700CFF4DE = {
+						CreatedOnToolsVersion = 12.4;
+						TestTargetID = CFD616E825E1AD3400CFF4DE;
+					};
+				};
+			};
+			buildConfigurationList = CFD616E425E1AD3400CFF4DE /* Build configuration list for PBXProject "QuizCards" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = CFD616E025E1AD3400CFF4DE;
+			productRefGroup = CFD616EA25E1AD3400CFF4DE /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				CFD616E825E1AD3400CFF4DE /* QuizCards */,
+				CFD616F825E1AD3700CFF4DE /* QuizCardsTests */,
+				CFD6170325E1AD3700CFF4DE /* QuizCardsUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		CFD616E725E1AD3400CFF4DE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CFD616EF25E1AD3700CFF4DE /* Assets.xcassets in Resources */,
+				CFD616F225E1AD3700CFF4DE /* MainMenu.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CFD616F725E1AD3700CFF4DE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CFD6170225E1AD3700CFF4DE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		CFD616E525E1AD3400CFF4DE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CFD616ED25E1AD3400CFF4DE /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CFD616F525E1AD3700CFF4DE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CFD616FE25E1AD3700CFF4DE /* QuizCardsTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CFD6170025E1AD3700CFF4DE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CFD6170925E1AD3700CFF4DE /* QuizCardsUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		CFD616FB25E1AD3700CFF4DE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CFD616E825E1AD3400CFF4DE /* QuizCards */;
+			targetProxy = CFD616FA25E1AD3700CFF4DE /* PBXContainerItemProxy */;
+		};
+		CFD6170625E1AD3700CFF4DE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CFD616E825E1AD3400CFF4DE /* QuizCards */;
+			targetProxy = CFD6170525E1AD3700CFF4DE /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		CFD616F025E1AD3700CFF4DE /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CFD616F125E1AD3700CFF4DE /* Base */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		CFD6170B25E1AD3700CFF4DE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 11.1;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		CFD6170C25E1AD3700CFF4DE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 11.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+			};
+			name = Release;
+		};
+		CFD6170E25E1AD3700CFF4DE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = QuizCards/QuizCards.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = QuizCards/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.buddhiman.QuizCards;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		CFD6170F25E1AD3700CFF4DE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = QuizCards/QuizCards.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = QuizCards/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.buddhiman.QuizCards;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		CFD6171125E1AD3700CFF4DE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = QuizCardsTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 11.1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.buddhiman.QuizCardsTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/QuizCards.app/Contents/MacOS/QuizCards";
+			};
+			name = Debug;
+		};
+		CFD6171225E1AD3700CFF4DE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = QuizCardsTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 11.1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.buddhiman.QuizCardsTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/QuizCards.app/Contents/MacOS/QuizCards";
+			};
+			name = Release;
+		};
+		CFD6171425E1AD3700CFF4DE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = QuizCardsUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.buddhiman.QuizCardsUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = QuizCards;
+			};
+			name = Debug;
+		};
+		CFD6171525E1AD3700CFF4DE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = QuizCardsUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.buddhiman.QuizCardsUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = QuizCards;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		CFD616E425E1AD3400CFF4DE /* Build configuration list for PBXProject "QuizCards" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CFD6170B25E1AD3700CFF4DE /* Debug */,
+				CFD6170C25E1AD3700CFF4DE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CFD6170D25E1AD3700CFF4DE /* Build configuration list for PBXNativeTarget "QuizCards" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CFD6170E25E1AD3700CFF4DE /* Debug */,
+				CFD6170F25E1AD3700CFF4DE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CFD6171025E1AD3700CFF4DE /* Build configuration list for PBXNativeTarget "QuizCardsTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CFD6171125E1AD3700CFF4DE /* Debug */,
+				CFD6171225E1AD3700CFF4DE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CFD6171325E1AD3700CFF4DE /* Build configuration list for PBXNativeTarget "QuizCardsUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CFD6171425E1AD3700CFF4DE /* Debug */,
+				CFD6171525E1AD3700CFF4DE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = CFD616E125E1AD3400CFF4DE /* Project object */;
+}
