@@ -34,12 +34,16 @@ class QCItemListViewController: NSViewController, NSTableViewDelegate, NSTableVi
     }
     @objc func editButtonClicked() {
 //        presentAsModalWindow(QCPresenterViewController(fileURL: URL(string: (getCards()?.root[tableView.selectedRow].path)!)))
+        print(tableView.selectedRow)
+        if tableView.selectedRow == -1 {
+        } else {
         var window = NSWindow(contentViewController: QCEditorViewController(fileURL: URL(string: (getCards()?.root[tableView.selectedRow].path)!)))
         window.title = "Editor"
         window.titlebarAppearsTransparent = true
         window.styleMask = [.fullSizeContentView, .borderless, .titled]
         if window.isVisible != true {
             window.makeKeyAndOrderFront(nil)
+        }
         }
     }
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {

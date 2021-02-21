@@ -154,15 +154,32 @@
                         <action selector="closeBTN:" target="-2" id="YkH-Wu-tCJ"/>
                     </connections>
                 </button>
+                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="IPD-Z0-WTz">
+                    <rect key="frame" x="450" y="240.5" width="30" height="33.5"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="30" id="4Be-Mj-dY2"/>
+                        <constraint firstAttribute="height" constant="30" id="cEf-UZ-Ze4"/>
+                    </constraints>
+                    <buttonCell key="cell" type="roundRect" bezelStyle="roundedRect" image="NSAddTemplate" imagePosition="overlaps" alignment="center" state="on" imageScaling="proportionallyDown" inset="2" id="X6B-VR-mxx">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="cellTitle"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="addButton:" target="-2" id="mBv-7t-J45"/>
+                    </connections>
+                </button>
             </subviews>
             <constraints>
                 <constraint firstItem="Hb6-er-RjX" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" id="BvX-Oy-b3v"/>
+                <constraint firstAttribute="trailing" secondItem="IPD-Z0-WTz" secondAttribute="trailing" id="WYq-DT-stH"/>
                 <constraint firstItem="Hb6-er-RjX" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" id="tfs-Fd-WUV"/>
+                <constraint firstItem="IPD-Z0-WTz" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" id="uEf-US-bLx"/>
             </constraints>
             <point key="canvasLocation" x="-146" y="121"/>
         </customView>
     </objects>
     <resources>
+        <image name="NSAddTemplate" width="14" height="13"/>
         <image name="NSStopProgressTemplate" width="14" height="13"/>
     </resources>
 </document>

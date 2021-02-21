@@ -17,6 +17,37 @@ class QCEditorViewController: NSViewController, NSTableViewDelegate, NSTableView
         tableView.delegate = self
         tableView.dataSource = self
     }
+    @IBAction func addButton(_ sender: Any) {
+        let infoListFile = path?.appendingPathComponent("card.plist")
+//        let cell = sender
+        let dict = NSDictionary(contentsOfFile: infoListFile!.absoluteString) as! NSDictionary
+//        let cell = tableView.selectedCell() as? QCEditorTableCellView
+        var QCName = dict["questions and answers"] as? [NSMutableDictionary]
+        
+        let newObject = NSMutableDictionary()
+        newObject.setValue("\"Answer\"" as? String, forKey: "answer")
+        newObject.setValue("\"Question\"" as? String, forKey: "question")
+//        print(NSMutableDictionary().setValue("Answer", forKey: "answer"))
+        print("look above")
+        print(QCName)
+
+        QCName?.append(newObject)
+        print("look bellow")
+
+        print(QCName)
+        
+        //        writePlistFile(infoListFile!, "question", data: "test")
+        
+        dict.write(toFile: infoListFile!.absoluteString, atomically: true)
+        do {
+            try dict.write(to: infoListFile!)
+            
+        } catch {
+            print("adsfkjadsnfkjasndfkjasndfkjasndfkjsnckadsjnrvriuh8")
+            print(error.localizedDescription)
+
+        }
+    }
     func numberOfRows(in tableView: NSTableView) -> Int {
         let infoListFile = path?.appendingPathComponent("card.plist")
         
