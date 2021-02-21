@@ -1,0 +1,139 @@
+//
+//  QCItemListViewController.swift
+//  QuizCards
+//
+//  Created by Ashwin Paudel on 2021-02-21.
+//
+
+import Cocoa
+
+class QCItemListViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSource {
+
+    @IBOutlet weak var tableView: NSTableView!
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        // Do view setup here.
+        tableView.delegate = self
+        tableView.dataSource = self
+    }
+    func numberOfRows(in tableView: NSTableView) -> Int {
+        print(getCards()!)
+        return getCards()!.root.count
+    }
+    @objc func previewButtonClicked() {
+//        presentAsModalWindow(QCPresenterViewController(fileURL: URL(string: (getCards()?.root[tableView.selectedRow].path)!)))
+        var window = NSWindow(contentViewController: QCPresenterViewController(fileURL: URL(string: (getCards()?.root[tableView.selectedRow].path)!)))
+        
+        window.title = "Quiz"
+        window.titlebarAppearsTransparent = true
+        window.styleMask = [.fullSizeContentView, .borderless, .titled]
+        if window.isVisible != true {
+            window.makeKeyAndOrderFront(nil)
+        }
+    }
+    @objc func editButtonClicked() {
+//        presentAsModalWindow(QCPresenterViewController(fileURL: URL(string: (getCards()?.root[tableView.selectedRow].path)!)))
+        var window = NSWindow(contentViewController: QCEditorViewController(fileURL: URL(string: (getCards()?.root[tableView.selectedRow].path)!)))
+        window.title = "Editor"
+        window.titlebarAppearsTransparent = true
+        window.styleMask = [.fullSizeContentView, .borderless, .titled]
+        if window.isVisible != true {
+            window.makeKeyAndOrderFront(nil)
+        }
+    }
+    func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
+        guard let cell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "extensionTableViewListCellView"), owner: self) as? QCTableCellView else { return nil }
+        let path = getCards()!.root[row].path
+        print("asdfasdf")
+        print(path)
+        let infoListFile = URL(string: path)!.appendingPathComponent("card.plist")
+        print("safdijasldfijasldf")
+        print(infoListFile)
+//        let name = readPlistFile(infoListFile.absoluteString, "name") as! String
+        
+        cell.QCPreviewButton.action = #selector(previewButtonClicked)
+        cell.QCEditButton.action = #selector(editButtonClicked)
+        let dict = NSDictionary(contentsOfFile: infoListFile.absoluteString) as! [String: AnyObject]
+
+          if let QCName = dict["name"] {
+               print("Info.plist : \(QCName)")
+            cell.QCItemTitle.stringValue = QCName as! String
+
+//           var dashC = CoachMarksDict["DashBoardCompleted"] as! Bool
+//            print("DashBoardCompleted state :\(dashC) ")
+          }
+        
+        
+        
+        print("asdfljnasdklfjdslafksadfkmsd")
+//        print(name)
+
+return cell
+    }
+    
+}
+public func getCards() ->  CardList? {
+    let decoder = PropertyListDecoder()
+    let url = QCDataDir()?.appendingPathComponent("cards.plist")
+    if !FileManager.default.fileExists(atPath: url!.absoluteString) {
+         FileManager.default.createFile(atPath: url!.absoluteString, contents: "".data(using: .utf8), attributes: nil)
+    }
+    if let data = try? Data(contentsOf: url!) {
+        if let settings = try? decoder.decode(CardList.self, from: data) {
+            return settings
+        }
+    }
+    return nil
+}
+
+public struct CardList: Codable {
+    let root: [CardItem]
+}
+public struct CardItem: Codable {
+    let path: String
+    let name: String
+}
+
+
+public struct QCCardList: Codable {
+    let root: [QCCardItem]
+}
+public struct QCCardItem: Codable {
+    let questionAndAnswer: [QCQA]
+}
+public struct QCQA: Codable {
+    let question: String
+    let answer: String
+}
+
+public func QCDataDir() -> URL? {
+    do {
+        let applicationSupportFolderURL = try FileManager.default.url(for: .applicationSupportDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
+        // swiftlint:disable force_cast
+        let appName = Bundle.main.object(forInfoDictionaryKey: "CFBundleIdentifier") as! String
+        let folder = applicationSupportFolderURL.appendingPathComponent("\(appName)/usr/data", isDirectory: true)
+        print("[ERR]: Folder location: \(folder.path)")
+        if !FileManager.default.fileExists(atPath: folder.path) {
+            try FileManager.default.createDirectory(at: folder, withIntermediateDirectories: true, attributes: nil)
+        }
+        return folder
+    } catch {
+    }
+    return nil
+}
+public func readPlistFile(_ path: String, _ key: String) -> Any {
+    let dataDir = URL(string: path)
+    let output: Any
+    print("sadfaisdfisdaf90u9809")
+    print(dataDir!)
+    if let dict = NSDictionary(contentsOf: dataDir!) {
+        print("sadfaisdfisdaf90u9809")
+
+        print(dict)
+        output = dict.object(forKey: key)!
+        return output
+    }
+    print("errorororororoorororororororoororororororo")
+    return "not found" as? Any
+}

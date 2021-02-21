@@ -4,6 +4,34 @@
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
+	<key>CFBundleDocumentTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleDocumentTypes</key>
+			<array>
+				<dict>
+					<key>CFBundleTypeName</key>
+					<string>LSTypeIsPackage</string>
+					<key>LSHandlerRank</key>
+					<string>Default</string>
+				</dict>
+			</array>
+			<key>CFBundleTypeExtensions</key>
+			<array>
+				<string>qccards</string>
+			</array>
+			<key>CFBundleTypeName</key>
+			<string>QuizCards Cards</string>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>LSHandlerRank</key>
+			<string>Default</string>
+			<key>LSItemContentTypes</key>
+			<array>
+				<string>com.buddhiman.QuizCards-Cards</string>
+			</array>
+		</dict>
+	</array>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIconFile</key>
@@ -26,5 +54,35 @@
 	<string>MainMenu</string>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
+	<key>UTExportedTypeDeclarations</key>
+	<array>
+		<dict>
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string>com.apple.package</string>
+				<string>public.composite-content</string>
+			</array>
+			<key>UTTypeDescription</key>
+			<string>Quiz Cards</string>
+			<key>UTTypeIcons</key>
+			<dict/>
+			<key>UTTypeIdentifier</key>
+			<string>com.buddhiman.QuizCards-Cards</string>
+			<key>UTTypeTagSpecification</key>
+			<dict>
+				<key>public.filename-extension</key>
+				<array>
+					<string>qccards</string>
+				</array>
+			</dict>
+		</dict>
+	</array>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+	</dict>
+	<key>allowsSpecificHTTPSCertificateForHost</key>
+	<true/>
 </dict>
 </plist>

@@ -7,11 +7,21 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CF1B5F0725E2F883005D443A /* QCEditorTableCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF1B5F0625E2F883005D443A /* QCEditorTableCellView.swift */; };
+		CF51418D25E2E20E00E8EA30 /* QCTableCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF51418C25E2E20E00E8EA30 /* QCTableCellView.swift */; };
 		CFD616ED25E1AD3400CFF4DE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD616EC25E1AD3400CFF4DE /* AppDelegate.swift */; };
 		CFD616EF25E1AD3700CFF4DE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CFD616EE25E1AD3700CFF4DE /* Assets.xcassets */; };
 		CFD616F225E1AD3700CFF4DE /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = CFD616F025E1AD3700CFF4DE /* MainMenu.xib */; };
 		CFD616FE25E1AD3700CFF4DE /* QuizCardsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD616FD25E1AD3700CFF4DE /* QuizCardsTests.swift */; };
 		CFD6170925E1AD3700CFF4DE /* QuizCardsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD6170825E1AD3700CFF4DE /* QuizCardsUITests.swift */; };
+		CFD6171B25E1AD5400CFF4DE /* QCWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD6171925E1AD5400CFF4DE /* QCWindowController.swift */; };
+		CFD6171C25E1AD5400CFF4DE /* QCWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CFD6171A25E1AD5400CFF4DE /* QCWindowController.xib */; };
+		CFD6172225E1AD8F00CFF4DE /* QCEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD6172025E1AD8F00CFF4DE /* QCEditorViewController.swift */; };
+		CFD6172325E1AD8F00CFF4DE /* QCEditorViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CFD6172125E1AD8F00CFF4DE /* QCEditorViewController.xib */; };
+		CFD6172925E1AD9F00CFF4DE /* QCPresenterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD6172725E1AD9F00CFF4DE /* QCPresenterViewController.swift */; };
+		CFD6172A25E1AD9F00CFF4DE /* QCPresenterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CFD6172825E1AD9F00CFF4DE /* QCPresenterViewController.xib */; };
+		CFF4F19325E2C0A4002E40BC /* QCItemListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFF4F19125E2C0A4002E40BC /* QCItemListViewController.swift */; };
+		CFF4F19425E2C0A4002E40BC /* QCItemListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CFF4F19225E2C0A4002E40BC /* QCItemListViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -32,18 +42,27 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		CF1B5F0625E2F883005D443A /* QCEditorTableCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QCEditorTableCellView.swift; sourceTree = "<group>"; };
+		CF51418C25E2E20E00E8EA30 /* QCTableCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QCTableCellView.swift; sourceTree = "<group>"; };
 		CFD616E925E1AD3400CFF4DE /* QuizCards.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QuizCards.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CFD616EC25E1AD3400CFF4DE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CFD616EE25E1AD3700CFF4DE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CFD616F125E1AD3700CFF4DE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		CFD616F325E1AD3700CFF4DE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		CFD616F425E1AD3700CFF4DE /* QuizCards.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = QuizCards.entitlements; sourceTree = "<group>"; };
 		CFD616F925E1AD3700CFF4DE /* QuizCardsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = QuizCardsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CFD616FD25E1AD3700CFF4DE /* QuizCardsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizCardsTests.swift; sourceTree = "<group>"; };
 		CFD616FF25E1AD3700CFF4DE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CFD6170425E1AD3700CFF4DE /* QuizCardsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = QuizCardsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CFD6170825E1AD3700CFF4DE /* QuizCardsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizCardsUITests.swift; sourceTree = "<group>"; };
 		CFD6170A25E1AD3700CFF4DE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CFD6171925E1AD5400CFF4DE /* QCWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QCWindowController.swift; sourceTree = "<group>"; };
+		CFD6171A25E1AD5400CFF4DE /* QCWindowController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = QCWindowController.xib; sourceTree = "<group>"; };
+		CFD6172025E1AD8F00CFF4DE /* QCEditorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QCEditorViewController.swift; sourceTree = "<group>"; };
+		CFD6172125E1AD8F00CFF4DE /* QCEditorViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = QCEditorViewController.xib; sourceTree = "<group>"; };
+		CFD6172725E1AD9F00CFF4DE /* QCPresenterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QCPresenterViewController.swift; sourceTree = "<group>"; };
+		CFD6172825E1AD9F00CFF4DE /* QCPresenterViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = QCPresenterViewController.xib; sourceTree = "<group>"; };
+		CFF4F19125E2C0A4002E40BC /* QCItemListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QCItemListViewController.swift; sourceTree = "<group>"; };
+		CFF4F19225E2C0A4002E40BC /* QCItemListViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = QCItemListViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,8 +116,17 @@
 				CFD616EC25E1AD3400CFF4DE /* AppDelegate.swift */,
 				CFD616EE25E1AD3700CFF4DE /* Assets.xcassets */,
 				CFD616F025E1AD3700CFF4DE /* MainMenu.xib */,
+				CFD6171925E1AD5400CFF4DE /* QCWindowController.swift */,
+				CFD6171A25E1AD5400CFF4DE /* QCWindowController.xib */,
+				CFD6172025E1AD8F00CFF4DE /* QCEditorViewController.swift */,
+				CFD6172125E1AD8F00CFF4DE /* QCEditorViewController.xib */,
+				CFD6172725E1AD9F00CFF4DE /* QCPresenterViewController.swift */,
+				CFD6172825E1AD9F00CFF4DE /* QCPresenterViewController.xib */,
+				CFF4F19125E2C0A4002E40BC /* QCItemListViewController.swift */,
+				CFF4F19225E2C0A4002E40BC /* QCItemListViewController.xib */,
+				CF51418C25E2E20E00E8EA30 /* QCTableCellView.swift */,
+				CF1B5F0625E2F883005D443A /* QCEditorTableCellView.swift */,
 				CFD616F325E1AD3700CFF4DE /* Info.plist */,
-				CFD616F425E1AD3700CFF4DE /* QuizCards.entitlements */,
 			);
 			path = QuizCards;
 			sourceTree = "<group>";
@@ -183,8 +211,10 @@
 		CFD616E125E1AD3400CFF4DE /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				CLASSPREFIX = QC;
 				LastSwiftUpdateCheck = 1240;
 				LastUpgradeCheck = 1240;
+				ORGANIZATIONNAME = "Buddhiman Studios";
 				TargetAttributes = {
 					CFD616E825E1AD3400CFF4DE = {
 						CreatedOnToolsVersion = 12.4;
@@ -225,7 +255,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				CFD616EF25E1AD3700CFF4DE /* Assets.xcassets in Resources */,
+				CFD6172325E1AD8F00CFF4DE /* QCEditorViewController.xib in Resources */,
+				CFD6171C25E1AD5400CFF4DE /* QCWindowController.xib in Resources */,
+				CFF4F19425E2C0A4002E40BC /* QCItemListViewController.xib in Resources */,
 				CFD616F225E1AD3700CFF4DE /* MainMenu.xib in Resources */,
+				CFD6172A25E1AD9F00CFF4DE /* QCPresenterViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -250,7 +284,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CFD6172225E1AD8F00CFF4DE /* QCEditorViewController.swift in Sources */,
+				CFD6172925E1AD9F00CFF4DE /* QCPresenterViewController.swift in Sources */,
 				CFD616ED25E1AD3400CFF4DE /* AppDelegate.swift in Sources */,
+				CF51418D25E2E20E00E8EA30 /* QCTableCellView.swift in Sources */,
+				CF1B5F0725E2F883005D443A /* QCEditorTableCellView.swift in Sources */,
+				CFF4F19325E2C0A4002E40BC /* QCItemListViewController.swift in Sources */,
+				CFD6171B25E1AD5400CFF4DE /* QCWindowController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -417,7 +457,6 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = QuizCards/QuizCards.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = QuizCards/Info.plist;
@@ -436,7 +475,6 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = QuizCards/QuizCards.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = QuizCards/Info.plist;
