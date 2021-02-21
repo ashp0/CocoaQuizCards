@@ -23,15 +23,18 @@ class QCPresenterViewController: NSViewController {
     func reloadData() {
         answerLabel.isHidden = true
 
+        
         let infoListFile = path?.appendingPathComponent("card.plist")
         
         let dict = NSDictionary(contentsOfFile: infoListFile!.absoluteString) as! [String: AnyObject]
 
           if let QCName = dict["questions and answers"] as? [NSDictionary] {
                print("Info.plist : \(QCName)")
+            let randomElement = QCName.randomElement()
+
             print(QCName[0].object(forKey: "question"))
-            questionLabel.stringValue = QCName.randomElement()?.object(forKey: "question") as! String
-            answerLabel.stringValue = QCName.randomElement()?.object(forKey: "answer") as! String
+            questionLabel.stringValue = randomElement!.object(forKey: "question") as! String
+            answerLabel.stringValue = randomElement!.object(forKey: "answer") as! String
 
             //                QCName[0].object(forKey: "question") as! String
             
