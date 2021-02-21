@@ -21,6 +21,9 @@ class QCItemListViewController: NSViewController, NSTableViewDelegate, NSTableVi
         print(getCards()!)
         return getCards()!.root.count
     }
+    @IBAction func closseButton(_ sender: Any) {
+        exit(0)
+    }
     @objc func previewButtonClicked() {
 //        presentAsModalWindow(QCPresenterViewController(fileURL: URL(string: (getCards()?.root[tableView.selectedRow].path)!)))
         var window = NSWindow(contentViewController: QCPresenterViewController(fileURL: URL(string: (getCards()?.root[tableView.selectedRow].path)!)))

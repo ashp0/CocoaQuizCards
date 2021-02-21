@@ -14,18 +14,18 @@
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <customView misplaced="YES" id="Hz6-mo-xeY">
-            <rect key="frame" x="0.0" y="0.0" width="487" height="583"/>
+            <rect key="frame" x="0.0" y="0.0" width="467" height="554"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <scrollView fixedFrame="YES" autohidesScrollers="YES" horizontalLineScroll="49" horizontalPageScroll="10" verticalLineScroll="49" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ybG-FP-V9q">
-                    <rect key="frame" x="0.0" y="0.0" width="484" height="583"/>
+                    <rect key="frame" x="0.0" y="0.0" width="464" height="554"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <clipView key="contentView" id="b6e-Qp-5YI">
-                        <rect key="frame" x="1" y="1" width="482" height="581"/>
+                        <rect key="frame" x="1" y="1" width="462" height="552"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowHeight="49" rowSizeStyle="automatic" headerView="yew-d2-Q8h" viewBased="YES" id="kCa-7d-FlG">
-                                <rect key="frame" x="0.0" y="0.0" width="482" height="553"/>
+                                <rect key="frame" x="0.0" y="0.0" width="482" height="524"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <size key="intercellSpacing" width="17" height="0.0"/>
                                 <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -44,7 +44,7 @@
                                         <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                         <prototypeCellViews>
                                             <tableCellView identifier="extensionTableViewListCellView" id="beW-vk-zj0" customClass="QCTableCellView" customModule="QuizCards" customModuleProvider="target">
-                                                <rect key="frame" x="18" y="0.0" width="465" height="49"/>
+                                                <rect key="frame" x="8" y="0.0" width="465" height="49"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
                                                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="ELO-Wy-hYh">
@@ -131,8 +131,8 @@
                             </tableView>
                         </subviews>
                     </clipView>
-                    <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="OFB-UM-dEJ">
-                        <rect key="frame" x="1" y="566" width="482" height="16"/>
+                    <scroller key="horizontalScroller" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="OFB-UM-dEJ">
+                        <rect key="frame" x="1" y="537" width="462" height="16"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </scroller>
                     <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="fzs-wR-vP0">
@@ -144,12 +144,31 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </tableHeaderView>
                 </scrollView>
+                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="dxD-xH-Eb4">
+                    <rect key="frame" x="0.0" y="522.5" width="30.5" height="33.5"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="JVF-It-Rfq"/>
+                        <constraint firstAttribute="width" constant="30" id="XaK-GJ-0Yw"/>
+                    </constraints>
+                    <buttonCell key="cell" type="roundRect" bezelStyle="roundedRect" image="NSStopProgressTemplate" imagePosition="overlaps" alignment="center" state="on" imageScaling="proportionallyDown" inset="2" id="I4h-Ub-NZe">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="cellTitle"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="closseButton:" target="-2" id="i1U-lL-mrR"/>
+                    </connections>
+                </button>
             </subviews>
+            <constraints>
+                <constraint firstItem="dxD-xH-Eb4" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" id="Nar-UR-veK"/>
+                <constraint firstItem="dxD-xH-Eb4" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" id="nMz-Wp-PZ7"/>
+            </constraints>
             <point key="canvasLocation" x="59.5" y="304.5"/>
         </customView>
     </objects>
     <resources>
         <image name="NSQuickLookTemplate" width="21" height="13"/>
+        <image name="NSStopProgressTemplate" width="14" height="13"/>
         <image name="pencil" catalog="system" width="14" height="13"/>
     </resources>
 </document>
