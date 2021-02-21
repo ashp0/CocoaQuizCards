@@ -21,14 +21,48 @@ class QCItemListViewController: NSViewController, NSTableViewDelegate, NSTableVi
         print(getCards()!)
         return getCards()!.root.count
     }
+    @IBAction func addNewFileButton(_ sender: Any) {
+        let panel = NSOpenPanel()
+        panel.allowsMultipleSelection = false
+        panel.canChooseDirectories = false
+        panel.canCreateDirectories = false
+        panel.canChooseFiles = true
+        panel.allowedFileTypes = ["qccards"]
+        panel.beginSheetModal(for: self.view.window!) { [self] (responce) in
+            if responce == .OK {
+                let newhistoryitem = CardItem(path: panel.url!.absoluteString, name: "Test")
+                let encoder = PropertyListEncoder()
+                encoder.outputFormat = .xml
+                let pListFilURL = QCDataDir()?.appendingPathComponent("cards.plist")
+                if !FileManager.default.fileExists(atPath: pListFilURL!.absoluteString) {
+                     FileManager.default.createFile(atPath: pListFilURL!.absoluteString, contents: "".data(using: .utf8), attributes: nil)
+                }
+                var allItems: [CardItem] = []
+                allItems.append(contentsOf: getCards()!.root)
+        //            allItems.append(contentsOf: getHistoryListItem()!.root)
+                allItems.append(newhistoryitem)
+                let newList = CardList(root: allItems)
+                do {
+                    let data = try encoder.encode(newList)
+                    try data.write(to: pListFilURL!)
+                } catch {
+                    print(error)
+                }
+            }
+    }
+        
+        self.dismiss(self)
+//        FileManager.default.secureCopyItem(at: <#T##URL#>, to: <#T##URL#>)
+    }
     @IBAction func closseButton(_ sender: Any) {
         exit(0)
     }
     @objc func previewButtonClicked() {
 //        presentAsModalWindow(QCPresenterViewController(fileURL: URL(string: (getCards()?.root[tableView.selectedRow].path)!)))
+        
         var window = NSWindow(contentViewController: QCPresenterViewController(fileURL: URL(string: (getCards()?.root[tableView.selectedRow].path)!)))
         
-        window.title = "Quiz"
+        window.title = ""
         window.titlebarAppearsTransparent = true
         window.styleMask = [.fullSizeContentView, .borderless, .titled]
         if window.isVisible != true {
@@ -41,7 +75,7 @@ class QCItemListViewController: NSViewController, NSTableViewDelegate, NSTableVi
         if tableView.selectedRow == -1 {
         } else {
         var window = NSWindow(contentViewController: QCEditorViewController(fileURL: URL(string: (getCards()?.root[tableView.selectedRow].path)!)))
-        window.title = "Editor"
+        window.title = ""
         window.titlebarAppearsTransparent = true
         window.styleMask = [.fullSizeContentView, .borderless, .titled]
         if window.isVisible != true {
@@ -143,4 +177,20 @@ public func readPlistFile(_ path: String, _ key: String) -> Any {
     }
     print("errorororororoorororororororoororororororo")
     return "not found" as? Any
+}
+extension FileManager {
+
+    open func secureCopyItem(at srcURL: URL, to dstURL: URL) -> Bool {
+        do {
+            if FileManager.default.fileExists(atPath: dstURL.path) {
+                try FileManager.default.removeItem(at: dstURL)
+            }
+            try FileManager.default.copyItem(at: srcURL, to: dstURL)
+        } catch (let error) {
+            print("Cannot copy item at \(srcURL) to \(dstURL): \(error)")
+            return false
+        }
+        return true
+    }
+
 }
