@@ -17,35 +17,52 @@ class QCEditorViewController: NSViewController, NSTableViewDelegate, NSTableView
         tableView.delegate = self
         tableView.dataSource = self
     }
-    @IBAction func addButton(_ sender: Any) {
+    func writeDictionary(toPlist plistDict: NSDictionary) -> Bool {
+        let infoListFile = path!.appendingPathComponent("card.plist")
+        let filePath = infoListFile.absoluteString
+        let result = (plistDict as NSDictionary?)?.write(toFile: filePath, atomically: true) ?? false
+        return result
+    }
+    @IBAction func deleteButton(_ sender: Any) {
         let infoListFile = path?.appendingPathComponent("card.plist")
-//        let cell = sender
-        let dict = NSDictionary(contentsOfFile: infoListFile!.absoluteString) as! NSDictionary
-//        let cell = tableView.selectedCell() as? QCEditorTableCellView
+        let dict = NSDictionary(contentsOfFile: infoListFile!.absoluteString) as! NSMutableDictionary
         var QCName = dict["questions and answers"] as? [NSMutableDictionary]
         
-        let newObject = NSMutableDictionary()
-        newObject.setValue("\"Answer\"" as? String, forKey: "answer")
-        newObject.setValue("\"Question\"" as? String, forKey: "question")
-//        print(NSMutableDictionary().setValue("Answer", forKey: "answer"))
-        print("look above")
-        print(QCName)
-
-        QCName?.append(newObject)
-        print("look bellow")
-
-        print(QCName)
-        
-        //        writePlistFile(infoListFile!, "question", data: "test")
-        
-        dict.write(toFile: infoListFile!.absoluteString, atomically: true)
+        QCName?.remove(at: tableView.selectedRow)
+//        print(QCName)
+//        print("adsfadfladf")
+        dict.setObject(QCName, forKey: "questions and answers" as NSCopying)
+        print(dict)
         do {
-            try dict.write(to: infoListFile!)
-            
+            let url = URL(string: "file://\(infoListFile!.absoluteString)")
+            try dict.write(to: url!)
+            print("successfully written data")
+            tableView.reloadData()
         } catch {
-            print("adsfkjadsnfkjasndfkjasndfkjasndfkjsnckadsjnrvriuh8")
             print(error.localizedDescription)
-
+            print(infoListFile)
+        }
+    }
+    @IBAction func addButton(_ sender: Any) {
+        let infoListFile = path?.appendingPathComponent("card.plist")
+        let dict = NSDictionary(contentsOfFile: infoListFile!.absoluteString) as! NSMutableDictionary
+        var QCName = dict["questions and answers"] as? [NSMutableDictionary]
+        let newObject = NSMutableDictionary()
+        newObject.setValue("Answer" as? String, forKey: "answer")
+        newObject.setValue("Question" as? String, forKey: "question")
+        QCName?.append(newObject)
+        print(QCName)
+        print("adsfadfladf")
+        dict.setObject(QCName, forKey: "questions and answers" as NSCopying)
+        print(dict)
+        do {
+            let url = URL(string: "file://\(infoListFile!.absoluteString)")
+            try dict.write(to: url!)
+            print("successfully written data")
+            tableView.reloadData()
+        } catch {
+            print(error.localizedDescription)
+            print(infoListFile)
         }
     }
     func numberOfRows(in tableView: NSTableView) -> Int {
