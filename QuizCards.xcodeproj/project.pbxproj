@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		CF1B5F0725E2F883005D443A /* QCEditorTableCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF1B5F0625E2F883005D443A /* QCEditorTableCellView.swift */; };
+		CF1F3DE625E4211900911E6C /* template.qccards in Resources */ = {isa = PBXBuildFile; fileRef = CF1F3DE525E4211900911E6C /* template.qccards */; };
 		CF51418D25E2E20E00E8EA30 /* QCTableCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF51418C25E2E20E00E8EA30 /* QCTableCellView.swift */; };
 		CF8E518425E3224400CD8637 /* QCItemListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CF8E518625E3224400CD8637 /* QCItemListViewController.xib */; };
 		CF8E518725E3224900CD8637 /* QCWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CF8E518925E3224900CD8637 /* QCWindowController.xib */; };
@@ -43,6 +44,7 @@
 
 /* Begin PBXFileReference section */
 		CF1B5F0625E2F883005D443A /* QCEditorTableCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QCEditorTableCellView.swift; sourceTree = "<group>"; };
+		CF1F3DE525E4211900911E6C /* template.qccards */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = template.qccards; sourceTree = "<group>"; };
 		CF51418C25E2E20E00E8EA30 /* QCTableCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QCTableCellView.swift; sourceTree = "<group>"; };
 		CF8E518525E3224400CD8637 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/QCItemListViewController.xib; sourceTree = "<group>"; };
 		CF8E518825E3224900CD8637 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/QCWindowController.xib; sourceTree = "<group>"; };
@@ -113,6 +115,7 @@
 		CFD616EB25E1AD3400CFF4DE /* QuizCards */ = {
 			isa = PBXGroup;
 			children = (
+				CF1F3DE525E4211900911E6C /* template.qccards */,
 				CFD616EC25E1AD3400CFF4DE /* AppDelegate.swift */,
 				CFD616EE25E1AD3700CFF4DE /* Assets.xcassets */,
 				CFD616F025E1AD3700CFF4DE /* MainMenu.xib */,
@@ -257,6 +260,7 @@
 				CFD616EF25E1AD3700CFF4DE /* Assets.xcassets in Resources */,
 				CF8E518A25E3224E00CD8637 /* QCEditorViewController.xib in Resources */,
 				CF8E518725E3224900CD8637 /* QCWindowController.xib in Resources */,
+				CF1F3DE625E4211900911E6C /* template.qccards in Resources */,
 				CF8E518425E3224400CD8637 /* QCItemListViewController.xib in Resources */,
 				CFD616F225E1AD3700CFF4DE /* MainMenu.xib in Resources */,
 				CF8E519025E3225200CD8637 /* QCPresenterViewController.xib in Resources */,

@@ -17,11 +17,15 @@ class QCItemListViewController: NSViewController, NSTableViewDelegate, NSTableVi
         tableView.delegate = self
         tableView.dataSource = self
     }
+    override func viewDidAppear() {
+        super.viewDidAppear()
+        tableView.reloadData()
+    }
     func numberOfRows(in tableView: NSTableView) -> Int {
         print(getCards()!)
         return getCards()!.root.count
     }
-    @IBAction func addNewFileButton(_ sender: Any) {
+    @objc func openQCCardFile() {
         let panel = NSOpenPanel()
         panel.allowsMultipleSelection = false
         panel.canChooseDirectories = false
@@ -55,11 +59,167 @@ class QCItemListViewController: NSViewController, NSTableViewDelegate, NSTableVi
                 }
             }
         }
-        
-//        FileManager.default.secureCopyItem(at: <#T##URL#>, to: <#T##URL#>)
     }
+    @IBAction func addNewFileButton(_ sender: Any) {
+        let menu = NSMenu()
+        menu.addItem(withTitle: "Open", action: #selector(openQCCardFile), keyEquivalent: "")
+        menu.addItem(withTitle: "Create New", action: #selector(createNewQCCardFile), keyEquivalent: "")
+        
+        if let sender = sender as? NSButton {
+            if let event = NSApplication.shared.currentEvent {
+            NSMenu.popUpContextMenu(menu, with: event, for: sender)
+//            NSMenu.popUpContextMenu(menu, with: event, for: sender)
+        }
+        }
+    }
+    func getString(title: String, question: String, defaultValue: String) -> String {
+        let msg = NSAlert()
+        msg.addButton(withTitle: "OK")      // 1st button
+        msg.addButton(withTitle: "Cancel")  // 2nd button
+        msg.messageText = title
+        msg.informativeText = question
+
+        let txt = NSTextField(frame: NSRect(x: 0, y: 0, width: 200, height: 24))
+        txt.stringValue = defaultValue
+
+        msg.accessoryView = txt
+        let response: NSApplication.ModalResponse = msg.runModal()
+
+        if (response == NSApplication.ModalResponse.alertFirstButtonReturn) {
+            return txt.stringValue
+        } else {
+            return ""
+        }
+    }
+    @objc func createNewQCCardFile() {
+        
+        let panel = NSOpenPanel()
+        panel.allowsMultipleSelection = false
+        panel.canChooseDirectories = true
+        panel.canCreateDirectories = true
+        panel.canChooseFiles = false
+//        panel.allowedFileTypes = ["qccards"]
+        panel.beginSheetModal(for: self.view.window!) { [self] (responce) in
+            if responce == .OK {
+                do {
+                let newURL = panel.url!.absoluteString.replacingOccurrences(of: "file://", with: "")
+                    let fileName = getString(title: "What is the file name", question: "Enter the file name underneath", defaultValue: "fileName")
+                    let filePath = URL(string: newURL)?.appendingPathComponent("\(fileName).qccards")
+print("asdfasdfas")
+                    print(filePath)
+                    let applicationSupportFolderURL = try panel.url
+                // swiftlint:disable force_cast
+                let appName = Bundle.main.object(forInfoDictionaryKey: "CFBundleIdentifier") as! String
+                    let folder = applicationSupportFolderURL!.appendingPathComponent("\(fileName).qccards", isDirectory: true)
+                print("[ERR]: Folder location: \(folder.path)")
+                if !FileManager.default.fileExists(atPath: folder.path) {
+                    try FileManager.default.createDirectory(at: folder, withIntermediateDirectories: true, attributes: nil)
+                }
+                    try templateString.write(to: folder.appendingPathComponent("card.plist"), atomically: true, encoding: .utf8)
+                    
+                    let newhistoryitem = CardItem(path: filePath!.absoluteString, name: "Test")
+                    let encoder = PropertyListEncoder()
+                    encoder.outputFormat = .xml
+                    let pListFilURL = QCDataDir()?.appendingPathComponent("cards.plist")
+                    if !FileManager.default.fileExists(atPath: pListFilURL!.absoluteString) {
+                         FileManager.default.createFile(atPath: pListFilURL!.absoluteString, contents: "".data(using: .utf8), attributes: nil)
+                    }
+                    var allItems: [CardItem] = []
+                    allItems.append(contentsOf: getCards()!.root)
+            //            allItems.append(contentsOf: getHistoryListItem()!.root)
+                    allItems.append(newhistoryitem)
+                    let newList = CardList(root: allItems)
+                    do {
+                        let data = try encoder.encode(newList)
+                        try data.write(to: pListFilURL!)
+                        tableView.reloadData()
+                        
+                    } catch {
+                        print(error)
+            }
+//                return folder
+            } catch {
+            }
+                
+                
+            }
+        }
+
+    }
+    let templateString = """
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>name</key>
+    <string>Template</string>
+    <key>questions and answers</key>
+    <array>
+        <dict>
+            <key>answer</key>
+            <string>Answer</string>
+            <key>question</key>
+            <string>Question</string>
+        </dict>
+    </array>
+</dict>
+</plist>
+"""
     @IBAction func closseButton(_ sender: Any) {
         exit(0)
+    }
+    func copyFilesFromBundleToDocumentsFolderWith(fileExtension: String) {
+        if let resPath = Bundle.main.resourcePath {
+            do {
+                let dirContents = try FileManager.default.contentsOfDirectory(atPath: resPath)
+                let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
+                let filteredFiles = dirContents.filter{ $0.contains(fileExtension)}
+                for fileName in filteredFiles {
+                    if let documentsURL = documentsURL {
+                        let sourceURL = Bundle.main.bundleURL.appendingPathComponent(fileName)
+                        let destURL = documentsURL.appendingPathComponent(fileName)
+                        do { try FileManager.default.copyItem(at: sourceURL, to: destURL) } catch { }
+                    }
+                }
+            } catch { }
+        }
+    }
+    @objc func deleteButtonClicked() {
+        if UserDefaults.standard.bool(forKey: "willShowDeleteDialog") == true {
+            let alert = NSAlert()
+            alert.messageText = "Item will be deleted from the list"
+            alert.addButton(withTitle: "Ok")
+            alert.showsSuppressionButton = true
+            
+            if let supress = alert.suppressionButton {
+                        let state = supress.state
+                        switch state {
+                        case NSControl.StateValue.on:
+                            UserDefaults.standard.set(true, forKey: "willShowDeleteDialog")
+                        default: break
+                        }
+                    }
+            alert.runModal()
+               }
+        let encoder = PropertyListEncoder()
+        encoder.outputFormat = .xml
+        let pListFilURL = QCDataDir()?.appendingPathComponent("cards.plist")
+        if !FileManager.default.fileExists(atPath: pListFilURL!.absoluteString) {
+             FileManager.default.createFile(atPath: pListFilURL!.absoluteString, contents: "".data(using: .utf8), attributes: nil)
+        }
+        var allItems: [CardItem] = []
+        allItems.append(contentsOf: getCards()!.root)
+//            allItems.append(contentsOf: getHistoryListItem()!.root)
+        allItems.remove(at: tableView.selectedRow)
+        let newList = CardList(root: allItems)
+        do {
+            let data = try encoder.encode(newList)
+            try data.write(to: pListFilURL!)
+            tableView.reloadData()
+            
+        } catch {
+            print(error)
+}
     }
     @objc func previewButtonClicked() {
         let isIndexValid = getCards()?.root.indices.contains(tableView.selectedRow)
@@ -110,6 +270,7 @@ class QCItemListViewController: NSViewController, NSTableViewDelegate, NSTableVi
         
         cell.QCPreviewButton.action = #selector(previewButtonClicked)
         cell.QCEditButton.action = #selector(editButtonClicked)
+        cell.QCDeleteButton.action = #selector(deleteButtonClicked)
         let dict = NSDictionary(contentsOfFile: infoListFile.absoluteString) as! [String: AnyObject]
         print(readPlistFile(infoListFile.absoluteString, "name"))
         print(infoListFile)

@@ -68,20 +68,30 @@
                                                                         <rect key="frame" x="334" y="3" width="70" height="9"/>
                                                                         <subviews>
                                                                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ak9-NL-ILn">
-                                                                                <rect key="frame" x="0.0" y="-2" width="33" height="13.5"/>
+                                                                                <rect key="frame" x="0.0" y="-2" width="20" height="13.5"/>
                                                                                 <buttonCell key="cell" type="recessed" bezelStyle="recessed" image="pencil" catalog="system" imagePosition="only" alignment="center" state="on" imageScaling="proportionallyDown" inset="2" id="nM8-2f-jIw">
                                                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                                     <font key="font" metaFont="systemBold" size="12"/>
                                                                                 </buttonCell>
                                                                             </button>
                                                                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ZmE-th-CuV">
-                                                                                <rect key="frame" x="38" y="-2" width="32.5" height="13.5"/>
+                                                                                <rect key="frame" x="25" y="-2" width="20.5" height="13.5"/>
                                                                                 <buttonCell key="cell" type="recessed" bezelStyle="recessed" image="NSQuickLookTemplate" imagePosition="overlaps" alignment="center" state="on" imageScaling="proportionallyDown" inset="2" id="udY-Fa-STF">
                                                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                                     <font key="font" metaFont="systemBold" size="12"/>
                                                                                 </buttonCell>
                                                                                 <connections>
                                                                                     <action selector="previewMode:" target="-1" id="IJf-9R-zrA"/>
+                                                                                </connections>
+                                                                            </button>
+                                                                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="eZW-pF-Q9R">
+                                                                                <rect key="frame" x="50" y="-3" width="20" height="16.5"/>
+                                                                                <buttonCell key="cell" type="recessed" bezelStyle="recessed" image="NSTouchBarDeleteTemplate" imagePosition="overlaps" alignment="center" state="on" imageScaling="proportionallyDown" inset="2" id="qRd-Ub-rU3">
+                                                                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                                                    <font key="font" metaFont="systemBold" size="12"/>
+                                                                                </buttonCell>
+                                                                                <connections>
+                                                                                    <action selector="previewMode:" target="-1" id="t9m-hf-tPe"/>
                                                                                 </connections>
                                                                             </button>
                                                                         </subviews>
@@ -91,8 +101,10 @@
                                                                         <visibilityPriorities>
                                                                             <integer value="1000"/>
                                                                             <integer value="1000"/>
+                                                                            <integer value="1000"/>
                                                                         </visibilityPriorities>
                                                                         <customSpacing>
+                                                                            <real value="3.4028234663852886e+38"/>
                                                                             <real value="3.4028234663852886e+38"/>
                                                                             <real value="3.4028234663852886e+38"/>
                                                                         </customSpacing>
@@ -123,6 +135,7 @@
                                                     <constraint firstItem="ELO-Wy-hYh" firstAttribute="leading" secondItem="beW-vk-zj0" secondAttribute="leading" id="R6e-qT-qYR"/>
                                                 </constraints>
                                                 <connections>
+                                                    <outlet property="QCDeleteButton" destination="eZW-pF-Q9R" id="BKr-Ja-AMk"/>
                                                     <outlet property="QCEditButton" destination="ak9-NL-ILn" id="TVC-8v-eAe"/>
                                                     <outlet property="QCItemTitle" destination="ahY-3s-rZI" id="d8P-la-H4w"/>
                                                     <outlet property="QCPreviewButton" destination="ZmE-th-CuV" id="RJa-2B-6bF"/>
@@ -156,7 +169,7 @@
                     </connections>
                 </button>
                 <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="u3c-ZY-eFL">
-                    <rect key="frame" x="419" y="425" width="30" height="19"/>
+                    <rect key="frame" x="419" y="425" width="30.5" height="19.5"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
                     <buttonCell key="cell" type="recessed" bezelStyle="recessed" image="NSAddTemplate" imagePosition="overlaps" alignment="center" state="on" imageScaling="proportionallyDown" inset="2" id="FKF-fs-w5v">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -180,6 +193,7 @@
         <image name="NSAddTemplate" width="14" height="13"/>
         <image name="NSQuickLookTemplate" width="21" height="13"/>
         <image name="NSStopProgressFreestandingTemplate" width="15" height="15"/>
+        <image name="NSTouchBarDeleteTemplate" width="15" height="17"/>
         <image name="pencil" catalog="system" width="14" height="13"/>
     </resources>
 </document>

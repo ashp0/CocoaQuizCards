@@ -9,6 +9,7 @@ import Cocoa
 
 class QCEditorViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSource, NSTextFieldDelegate {
 
+    @IBOutlet weak var cardNameTextField: NSTextField!
     @IBOutlet weak var tableView: NSTableView!
     var path = URL(string: "")
     override func viewDidLoad() {
@@ -16,6 +17,12 @@ class QCEditorViewController: NSViewController, NSTableViewDelegate, NSTableView
         // Do view setup here.
         tableView.delegate = self
         tableView.dataSource = self
+        let infoListFile = path?.appendingPathComponent("card.plist")
+        let dict = NSDictionary(contentsOfFile: infoListFile!.absoluteString) as! NSMutableDictionary
+        var QCName = dict["name"] as? String
+
+        cardNameTextField.stringValue = QCName!
+        cardNameTextField.delegate = self
     }
     func writeDictionary(toPlist plistDict: NSDictionary) -> Bool {
         let infoListFile = path!.appendingPathComponent("card.plist")
@@ -151,6 +158,10 @@ class QCEditorViewController: NSViewController, NSTableViewDelegate, NSTableView
         let dict = NSDictionary(contentsOfFile: infoListFile!.absoluteString) as! NSDictionary
 //        let cell = tableView.selectedCell() as? QCEditorTableCellView
           let QCName = dict["questions and answers"] as? [NSMutableDictionary]
+        let QCNamee = dict["name"] as? String
+
+        dict.setValue(cardNameTextField.stringValue, forKey: "name")
+        
         QCName?[tableView.selectedRow].setValue(cell!.QCQuestionTextField.stringValue, forKey: "question")
         QCName?[tableView.selectedRow].setValue(cell!.QCAnswerTextField.stringValue, forKey: "answer")
 //        writePlistFile(infoListFile!, "question", data: "test")

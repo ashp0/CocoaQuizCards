@@ -12,6 +12,7 @@ class QCTableCellView: NSTableCellView {
     @IBOutlet weak var QCItemTitle: NSTextField!
     @IBOutlet weak var QCPreviewButton: NSButton!
     @IBOutlet weak var QCEditButton: NSButton!
+    @IBOutlet weak var QCDeleteButton: NSButton!
 
     override func draw(_ dirtyRect: NSRect) {
         super.draw(dirtyRect)
