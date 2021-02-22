@@ -7,7 +7,7 @@
 
 import Cocoa
 
-class QCPresenterViewController: NSViewController {
+class QCPresenterViewController: NSViewController, NSSharingServiceDelegate {
 
     @IBOutlet weak var questionLabel: NSTextField!
     
@@ -20,6 +20,22 @@ class QCPresenterViewController: NSViewController {
         reloadData()
         // Do view setup here.
     }
+    @IBAction func shareFile(_ sender: NSButton) {
+        let newURL = "\(path!)/"
+        let shareItems = [NSURL(fileURLWithPath: newURL)]
+//        let service = NSSharingService(named: .composeMessage)
+//        service?.delegate = self
+////        service?.recipients = ["/tim.cook@apple.com"]
+//        service?.subject = "\(NSLocalizedString("Re: Requested PDF", comment: ""))"
+//
+////        var sdfasd = URL(string: "")
+//        service?.perform(withItems: shareItems)
+        
+                NSSharingService.shareSocialData(content: shareItems, button: sender)
+    }
+
+//    override var acceptsFirstResponder: Bool { get { return true } }
+
     func reloadData() {
         answerLabel.isHidden = true
 
@@ -60,4 +76,11 @@ class QCPresenterViewController: NSViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+}
+extension NSSharingService {
+class func shareSocialData ( content: [AnyObject], button: NSButton ) {
+    let sharingServicePicker = NSSharingServicePicker (items: content )
+
+    sharingServicePicker.show(relativeTo: button.bounds, of: button, preferredEdge: NSRectEdge.maxX)
+}
 }

@@ -30,46 +30,55 @@ class QCItemListViewController: NSViewController, NSTableViewDelegate, NSTableVi
         panel.allowedFileTypes = ["qccards"]
         panel.beginSheetModal(for: self.view.window!) { [self] (responce) in
             if responce == .OK {
-                let newURL = panel.url!.absoluteString.replacingOccurrences(of: "file:///", with: "")
-
-                let newhistoryitem = CardItem(path: newURL, name: "Test")
-                let encoder = PropertyListEncoder()
-                encoder.outputFormat = .xml
-                let pListFilURL = QCDataDir()?.appendingPathComponent("cards.plist")
-                if !FileManager.default.fileExists(atPath: pListFilURL!.absoluteString) {
-                     FileManager.default.createFile(atPath: pListFilURL!.absoluteString, contents: "".data(using: .utf8), attributes: nil)
-                }
-                var allItems: [CardItem] = []
-                allItems.append(contentsOf: getCards()!.root)
-        //            allItems.append(contentsOf: getHistoryListItem()!.root)
-                allItems.append(newhistoryitem)
-                let newList = CardList(root: allItems)
-                do {
-                    let data = try encoder.encode(newList)
-                    try data.write(to: pListFilURL!)
-                } catch {
-                    print(error)
+                let newURL = panel.url!.absoluteString.replacingOccurrences(of: "file://", with: "")
+                var itemCount = getCards()?.root.count
+                var i = 0
+                        let newhistoryitem = CardItem(path: newURL, name: "Test")
+                        let encoder = PropertyListEncoder()
+                        encoder.outputFormat = .xml
+                        let pListFilURL = QCDataDir()?.appendingPathComponent("cards.plist")
+                        if !FileManager.default.fileExists(atPath: pListFilURL!.absoluteString) {
+                             FileManager.default.createFile(atPath: pListFilURL!.absoluteString, contents: "".data(using: .utf8), attributes: nil)
+                        }
+                        var allItems: [CardItem] = []
+                        allItems.append(contentsOf: getCards()!.root)
+                //            allItems.append(contentsOf: getHistoryListItem()!.root)
+                        allItems.append(newhistoryitem)
+                        let newList = CardList(root: allItems)
+                        do {
+                            let data = try encoder.encode(newList)
+                            try data.write(to: pListFilURL!)
+                            tableView.reloadData()
+                            
+                        } catch {
+                            print(error)
                 }
             }
-    }
+        }
         
-        self.dismiss(self)
 //        FileManager.default.secureCopyItem(at: <#T##URL#>, to: <#T##URL#>)
     }
     @IBAction func closseButton(_ sender: Any) {
         exit(0)
     }
     @objc func previewButtonClicked() {
+        let isIndexValid = getCards()?.root.indices.contains(tableView.selectedRow)
+        if isIndexValid == true {
+            let window = NSWindow(contentViewController: QCPresenterViewController(fileURL: URL(string: (getCards()?.root[tableView.selectedRow].path)!)))
+            
+            window.title = ""
+            window.titlebarAppearsTransparent = true
+            window.styleMask = [.fullSizeContentView, .borderless, .titled, .resizable]
+            window.standardWindowButton(.miniaturizeButton)!.isHidden = true
+            window.standardWindowButton(.zoomButton)!.isHidden = true
+            window.standardWindowButton(.closeButton)!.isHidden = true
+            if window.isVisible != true {
+                window.makeKeyAndOrderFront(nil)
+            }
+        }
 //        presentAsModalWindow(QCPresenterViewController(fileURL: URL(string: (getCards()?.root[tableView.selectedRow].path)!)))
         
-        var window = NSWindow(contentViewController: QCPresenterViewController(fileURL: URL(string: (getCards()?.root[tableView.selectedRow].path)!)))
         
-        window.title = ""
-        window.titlebarAppearsTransparent = true
-        window.styleMask = [.fullSizeContentView, .borderless, .titled]
-        if window.isVisible != true {
-            window.makeKeyAndOrderFront(nil)
-        }
     }
     @objc func editButtonClicked() {
 //        presentAsModalWindow(QCPresenterViewController(fileURL: URL(string: (getCards()?.root[tableView.selectedRow].path)!)))
@@ -79,7 +88,11 @@ class QCItemListViewController: NSViewController, NSTableViewDelegate, NSTableVi
         var window = NSWindow(contentViewController: QCEditorViewController(fileURL: URL(string: (getCards()?.root[tableView.selectedRow].path)!)))
         window.title = ""
         window.titlebarAppearsTransparent = true
-            window.styleMask = [.fullSizeContentView, .borderless, .titled]
+            window.styleMask = [.fullSizeContentView, .borderless, .titled, .resizable]
+//            window.standardWindowButton(.zoomButton)?.isHidden = true
+            window.standardWindowButton(.miniaturizeButton)!.isHidden = true
+            window.standardWindowButton(.zoomButton)!.isHidden = true
+            window.standardWindowButton(.closeButton)!.isHidden = true
         if window.isVisible != true {
             window.makeKeyAndOrderFront(nil)
         }

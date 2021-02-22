@@ -7,7 +7,7 @@
 
 import Cocoa
 
-class QCEditorViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSource {
+class QCEditorViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSource, NSTextFieldDelegate {
 
     @IBOutlet weak var tableView: NSTableView!
     var path = URL(string: "")
@@ -50,6 +50,21 @@ class QCEditorViewController: NSViewController, NSTableViewDelegate, NSTableView
             print(infoListFile)
         }
     }
+   
+    @IBOutlet weak var deleteBTNOutlet: NSButton!
+    @IBAction func saveButtonAction(_ sender: Any) {
+        saveBTN()
+    }
+    func tableView(_ tableView: NSTableView, shouldSelectRow row: Int) -> Bool {
+        if tableView.isHighlighted != true {
+            deleteBTNOutlet.isEnabled = true
+        } else {
+            deleteBTNOutlet.isEnabled = false
+        }
+        return true
+
+    }
+    
     @IBAction func addButton(_ sender: Any) {
         let infoListFile = path?.appendingPathComponent("card.plist")
         let dict = NSDictionary(contentsOfFile: infoListFile!.absoluteString) as! NSMutableDictionary
@@ -79,6 +94,7 @@ class QCEditorViewController: NSViewController, NSTableViewDelegate, NSTableView
             print(infoListFile)
         }
     }
+    
     func numberOfRows(in tableView: NSTableView) -> Int {
         let infoListFile = path?.appendingPathComponent("card.plist")
         
@@ -103,10 +119,30 @@ class QCEditorViewController: NSViewController, NSTableViewDelegate, NSTableView
         
         cell.QCQuestionTextField.stringValue = QCName?[row].object(forKey: "question") as! String
         cell.QCAnswerTextField.stringValue = QCName?[row].object(forKey: "answer") as! String
-        cell.QCSaveButton.action = #selector(saveBTN)
+        cell.QCAnswerTextField.delegate = self
+        cell.QCQuestionTextField.delegate = self
+//        cell.QCSaveButton.action = #selector(saveBTN)
         return cell
     }
-    @objc func saveBTN(_ sender: QCEditorTableCellView) {
+    func control(_ control: NSControl, textShouldEndEditing fieldEditor: NSText) -> Bool {
+        saveBTN()
+        return true
+    }
+    
+    func control(_ control: NSControl, textShouldBeginEditing fieldEditor: NSText) -> Bool {
+        saveBTN()
+        return true
+    }
+    func controlTextDidBeginEditing(_ obj: Notification) {
+        saveBTN()
+    }
+    func controlTextDidChange(_ obj: Notification) {
+        saveBTN()
+    }
+    func controlTextDidEndEditing(_ obj: Notification) {
+        saveBTN()
+    }
+    @objc func saveBTN() {
         print("dsafasdf")
         let infoListFile = path?.appendingPathComponent("card.plist")
 //        let cell = sender
@@ -121,6 +157,10 @@ class QCEditorViewController: NSViewController, NSTableViewDelegate, NSTableView
         
         do {
             let sdfads = try! dict.write(toFile: infoListFile!.absoluteString, atomically: true)
+            try! dict.write(toFile: infoListFile!.absoluteString, atomically: true)
+//            try! dict.write(to: infoListFile!)
+            try! dict.write(to: infoListFile!, atomically: true)
+
             if sdfads == true {
             print("dsasadfalnsdflkasdnfasdf")
             }
