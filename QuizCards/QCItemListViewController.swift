@@ -14,6 +14,9 @@ class QCItemListViewController: NSViewController, NSTableViewDelegate, NSTableVi
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do view setup here.
+        Timer.scheduledTimer(withTimeInterval: 5, repeats: true) { timer in
+            self.tableView.reloadData()
+        }
         tableView.delegate = self
         tableView.dataSource = self
     }

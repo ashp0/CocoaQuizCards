@@ -42,7 +42,29 @@ let windowController = QCWindowController()
         // Insert code here to tear down your application
     }
     func application(_ application: NSApplication, open urls: [URL]) {
-        
+        let newURL = urls[0].absoluteString.replacingOccurrences(of: "file://", with: "")
+        var itemCount = getCards()?.root.count
+        var i = 0
+                let newhistoryitem = CardItem(path: newURL, name: "Test")
+                let encoder = PropertyListEncoder()
+                encoder.outputFormat = .xml
+                let pListFilURL = QCDataDir()?.appendingPathComponent("cards.plist")
+                if !FileManager.default.fileExists(atPath: pListFilURL!.absoluteString) {
+                     FileManager.default.createFile(atPath: pListFilURL!.absoluteString, contents: "".data(using: .utf8), attributes: nil)
+                }
+                var allItems: [CardItem] = []
+                allItems.append(contentsOf: getCards()!.root)
+        //            allItems.append(contentsOf: getHistoryListItem()!.root)
+                allItems.append(newhistoryitem)
+                let newList = CardList(root: allItems)
+                do {
+                    let data = try encoder.encode(newList)
+                    try data.write(to: pListFilURL!)
+//                    tableView.reloadData()
+                    
+                } catch {
+                    print(error)
+        }
     }
 
 
