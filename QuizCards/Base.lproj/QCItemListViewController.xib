@@ -44,7 +44,7 @@
                                         <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                         <prototypeCellViews>
                                             <tableCellView identifier="extensionTableViewListCellView" id="beW-vk-zj0" customClass="QCTableCellView" customModule="QuizCards" customModuleProvider="target">
-                                                <rect key="frame" x="8" y="0.0" width="451" height="49"/>
+                                                <rect key="frame" x="18" y="0.0" width="451" height="49"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
                                                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="ELO-Wy-hYh">
@@ -55,7 +55,7 @@
                                                                 <subviews>
                                                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ahY-3s-rZI">
                                                                         <rect key="frame" x="-2" y="1" width="365" height="16"/>
-                                                                        <textFieldCell key="cell" lineBreakMode="clipping" title="Math Test" id="NcY-Nl-dnW">
+                                                                        <textFieldCell key="cell" lineBreakMode="clipping" title="Something" id="NcY-Nl-dnW">
                                                                             <font key="font" usesAppearanceFont="YES"/>
                                                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -131,7 +131,7 @@
                             </tableView>
                         </subviews>
                     </clipView>
-                    <scroller key="horizontalScroller" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="0.83333333333333337" horizontal="YES" id="OFB-UM-dEJ">
+                    <scroller key="horizontalScroller" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="OFB-UM-dEJ">
                         <rect key="frame" x="1" y="432" width="462" height="16"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </scroller>

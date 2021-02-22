@@ -34,10 +34,17 @@ class QCEditorViewController: NSViewController, NSTableViewDelegate, NSTableView
         dict.setObject(QCName, forKey: "questions and answers" as NSCopying)
         print(dict)
         do {
+            if infoListFile?.absoluteString.hasPrefix("file:///") == true {
+                let url = URL(string: "\(infoListFile!.absoluteString)")
+                try dict.write(to: url!)
+                print("successfully written data")
+                tableView.reloadData()
+            } else {
             let url = URL(string: "file://\(infoListFile!.absoluteString)")
             try dict.write(to: url!)
             print("successfully written data")
             tableView.reloadData()
+            }
         } catch {
             print(error.localizedDescription)
             print(infoListFile)
@@ -56,10 +63,17 @@ class QCEditorViewController: NSViewController, NSTableViewDelegate, NSTableView
         dict.setObject(QCName, forKey: "questions and answers" as NSCopying)
         print(dict)
         do {
+            if infoListFile?.absoluteString.hasPrefix("file:///") == true {
+                let url = URL(string: "\(infoListFile!.absoluteString)")
+                try dict.write(to: url!)
+                print("successfully written data")
+                tableView.reloadData()
+            } else {
             let url = URL(string: "file://\(infoListFile!.absoluteString)")
             try dict.write(to: url!)
             print("successfully written data")
             tableView.reloadData()
+            }
         } catch {
             print(error.localizedDescription)
             print(infoListFile)

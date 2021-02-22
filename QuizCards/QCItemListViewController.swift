@@ -30,7 +30,9 @@ class QCItemListViewController: NSViewController, NSTableViewDelegate, NSTableVi
         panel.allowedFileTypes = ["qccards"]
         panel.beginSheetModal(for: self.view.window!) { [self] (responce) in
             if responce == .OK {
-                let newhistoryitem = CardItem(path: panel.url!.absoluteString, name: "Test")
+                let newURL = panel.url!.absoluteString.replacingOccurrences(of: "file:///", with: "")
+
+                let newhistoryitem = CardItem(path: newURL, name: "Test")
                 let encoder = PropertyListEncoder()
                 encoder.outputFormat = .xml
                 let pListFilURL = QCDataDir()?.appendingPathComponent("cards.plist")
@@ -77,7 +79,7 @@ class QCItemListViewController: NSViewController, NSTableViewDelegate, NSTableVi
         var window = NSWindow(contentViewController: QCEditorViewController(fileURL: URL(string: (getCards()?.root[tableView.selectedRow].path)!)))
         window.title = ""
         window.titlebarAppearsTransparent = true
-        window.styleMask = [.fullSizeContentView, .borderless, .titled]
+            window.styleMask = [.fullSizeContentView, .borderless, .titled]
         if window.isVisible != true {
             window.makeKeyAndOrderFront(nil)
         }
@@ -96,7 +98,8 @@ class QCItemListViewController: NSViewController, NSTableViewDelegate, NSTableVi
         cell.QCPreviewButton.action = #selector(previewButtonClicked)
         cell.QCEditButton.action = #selector(editButtonClicked)
         let dict = NSDictionary(contentsOfFile: infoListFile.absoluteString) as! [String: AnyObject]
-
+        print(readPlistFile(infoListFile.absoluteString, "name"))
+        print(infoListFile)
           if let QCName = dict["name"] {
                print("Info.plist : \(QCName)")
             cell.QCItemTitle.stringValue = QCName as! String
