@@ -25,9 +25,13 @@ class QCItemListViewController: NSViewController, NSTableViewDelegate, NSTableVi
         tableView.reloadData()
     }
     func numberOfRows(in tableView: NSTableView) -> Int {
-        print(getCards()!)
-        return getCards()!.root.count
+        if let cards = getCards() {
+            return cards.root.count
+        } else {
+            return 0
+        }
     }
+    
     @objc func openQCCardFile() {
         let panel = NSOpenPanel()
         panel.allowsMultipleSelection = false
@@ -127,8 +131,9 @@ print("asdfasdfas")
                     if !FileManager.default.fileExists(atPath: pListFilURL!.absoluteString) {
                          FileManager.default.createFile(atPath: pListFilURL!.absoluteString, contents: "".data(using: .utf8), attributes: nil)
                     }
+                    
                     var allItems: [CardItem] = []
-                    allItems.append(contentsOf: getCards()!.root)
+                   // allItems.append(contentsOf: getCards()!.root)
             //            allItems.append(contentsOf: getHistoryListItem()!.root)
                     allItems.append(newhistoryitem)
                     let newList = CardList(root: allItems)
