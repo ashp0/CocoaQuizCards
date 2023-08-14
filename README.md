@@ -1,6 +1,6 @@
 # QuizCards
 > Project no longer in development
-> 
+
 Quiz Cards is a digital version of Flash Cards. Easy and intuitive to use and helpful for studying. 
 
 # Images
