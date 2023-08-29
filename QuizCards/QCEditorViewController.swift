@@ -8,60 +8,51 @@
 import Cocoa
 
 class QCEditorViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSource, NSTextFieldDelegate {
-
     @IBOutlet weak var cardNameTextField: NSTextField!
     @IBOutlet weak var tableView: NSTableView!
+    @IBOutlet weak var deleteBTNOutlet: NSButton!
+    
     var path = URL(string: "")
+    var cardData: NSMutableDictionary
+    var infoListFile: URL
+    
+    // Access the proper item in the getCards() function
+    var index: Int
+    private var previouslySelectedCell: QCEditorTableCellView?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do view setup here.
+        let dict = NSDictionary(contentsOfFile: infoListFile.absoluteString) as! NSMutableDictionary
+        cardData = dict
+        
         tableView.delegate = self
         tableView.dataSource = self
-        let infoListFile = path?.appendingPathComponent("card.plist")
-        let dict = NSDictionary(contentsOfFile: infoListFile!.absoluteString) as! NSMutableDictionary
-        var QCName = dict["name"] as? String
-
-        cardNameTextField.stringValue = QCName!
+        
+        if let flashDeckTitle = cardData["name"] as? String {
+            cardNameTextField.stringValue = flashDeckTitle
+        }
+        
+        tableView.reloadData()
         cardNameTextField.delegate = self
     }
-    func writeDictionary(toPlist plistDict: NSDictionary) -> Bool {
-        let infoListFile = path!.appendingPathComponent("card.plist")
-        let filePath = infoListFile.absoluteString
-        let result = (plistDict as NSDictionary?)?.write(toFile: filePath, atomically: true) ?? false
-        return result
-    }
-    @IBAction func deleteButton(_ sender: Any) {
-        let infoListFile = path?.appendingPathComponent("card.plist")
-        let dict = NSDictionary(contentsOfFile: infoListFile!.absoluteString) as! NSMutableDictionary
-        var QCName = dict["questions and answers"] as? [NSMutableDictionary]
-        
-        QCName?.remove(at: tableView.selectedRow)
-//        print(QCName)
-//        print("adsfadfladf")
-        dict.setObject(QCName, forKey: "questions and answers" as NSCopying)
-        print(dict)
-        do {
-            if infoListFile?.absoluteString.hasPrefix("file:///") == true {
-                let url = URL(string: "\(infoListFile!.absoluteString)")
-                try dict.write(to: url!)
-                print("successfully written data")
-                tableView.reloadData()
-            } else {
-            let url = URL(string: "file://\(infoListFile!.absoluteString)")
-            try dict.write(to: url!)
-            print("successfully written data")
-            tableView.reloadData()
-            }
-        } catch {
-            print(error.localizedDescription)
-            print(infoListFile)
+    
+    override func viewWillAppear() {
+        if previouslySelectedCell == nil, let cell = tableView.view(atColumn: tableView.selectedColumn, row: tableView.selectedRow, makeIfNecessary: false) as? QCEditorTableCellView {
+            previouslySelectedCell = cell
+            cell.isSelected = true
         }
     }
-   
-    @IBOutlet weak var deleteBTNOutlet: NSButton!
-    @IBAction func saveButtonAction(_ sender: Any) {
+    
+    @IBAction func deleteButton(_ sender: Any) {
+        var questions = cardData["questions and answers"] as! [NSMutableDictionary]
+        questions.remove(at: tableView.selectedRow)
+        
+        cardData.setObject(questions, forKey: "questions and answers" as NSCopying)
+        
         saveBTN()
+        tableView.reloadData()
     }
+    
     func tableView(_ tableView: NSTableView, shouldSelectRow row: Int) -> Bool {
         if tableView.isHighlighted != true {
             deleteBTNOutlet.isEnabled = true
@@ -69,68 +60,105 @@ class QCEditorViewController: NSViewController, NSTableViewDelegate, NSTableView
             deleteBTNOutlet.isEnabled = false
         }
         return true
-
     }
     
     @IBAction func addButton(_ sender: Any) {
-        let infoListFile = path?.appendingPathComponent("card.plist")
-        let dict = NSDictionary(contentsOfFile: infoListFile!.absoluteString) as! NSMutableDictionary
-        var QCName = dict["questions and answers"] as? [NSMutableDictionary]
+        var questions = cardData["questions and answers"] as? [NSMutableDictionary]
+        
         let newObject = NSMutableDictionary()
-        newObject.setValue("Answer" as? String, forKey: "answer")
-        newObject.setValue("Question" as? String, forKey: "question")
-        QCName?.append(newObject)
-        print(QCName)
-        print("adsfadfladf")
-        dict.setObject(QCName, forKey: "questions and answers" as NSCopying)
-        print(dict)
-        do {
-            if infoListFile?.absoluteString.hasPrefix("file:///") == true {
-                let url = URL(string: "\(infoListFile!.absoluteString)")
-                try dict.write(to: url!)
-                print("successfully written data")
-                tableView.reloadData()
-            } else {
-            let url = URL(string: "file://\(infoListFile!.absoluteString)")
-            try dict.write(to: url!)
-            print("successfully written data")
-            tableView.reloadData()
-            }
-        } catch {
-            print(error.localizedDescription)
-            print(infoListFile)
-        }
+        newObject.setValue("Answer", forKey: "answer")
+        newObject.setValue("Question", forKey: "question")
+        questions?.append(newObject)
+        
+        cardData.setObject(questions!, forKey: "questions and answers" as NSCopying)
+        
+        saveBTN()
+        tableView.reloadData()
     }
     
     func numberOfRows(in tableView: NSTableView) -> Int {
-        let infoListFile = path?.appendingPathComponent("card.plist")
-        
-        let dict = NSDictionary(contentsOfFile: infoListFile!.absoluteString) as! [String: AnyObject]
-
-          let QCName = dict["questions and answers"] as? [NSDictionary]
-        return QCName!.count
-            
-        
+        let questions = cardData["questions and answers"] as? [NSMutableDictionary]
+        return questions!.count
     }
+    
     @IBAction func closeBTN(_ sender: Any) {
+        // Save the cardData to the file
+        cardData.write(toFile: infoListFile.absoluteString, atomically: true)
+        cardData.write(toFile: infoListFile.absoluteString, atomically: true)
+        cardData.write(to: infoListFile, atomically: true)
+        
+        
+        // Close window
         self.view.window?.close()
     }
+    
+    func tableViewSelectionDidChange(_ notification: Notification) {
+        if let cell = tableView.view(atColumn: tableView.selectedColumn, row: tableView.selectedRow, makeIfNecessary: false) as? QCEditorTableCellView {
+            previouslySelectedCell?.isSelected = false
+            previouslySelectedCell = cell
+            previouslySelectedCell!.isSelected = true
+        }
+    }
+    
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
         guard let cell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "qcedtiorlistview"), owner: self) as? QCEditorTableCellView else { return nil }
         
-        let infoListFile = path?.appendingPathComponent("card.plist")
+        let questions = cardData["questions and answers"] as? [NSMutableDictionary]
         
-        let dict = NSDictionary(contentsOfFile: infoListFile!.absoluteString) as! [String: AnyObject]
-
-          let QCName = dict["questions and answers"] as? [NSMutableDictionary]
-        
-        cell.QCQuestionTextField.stringValue = QCName?[row].object(forKey: "question") as! String
-        cell.QCAnswerTextField.stringValue = QCName?[row].object(forKey: "answer") as! String
+        cell.QCQuestionTextField.stringValue = questions?[row].object(forKey: "question") as! String
+        cell.QCAnswerTextField.stringValue = questions?[row].object(forKey: "answer") as! String
         cell.QCAnswerTextField.delegate = self
         cell.QCQuestionTextField.delegate = self
-//        cell.QCSaveButton.action = #selector(saveBTN)
+        cell.QCImageButton.action = #selector(uploadImage)
+        
+        if let image = questions?[row].object(forKey: "image") as? String {
+            cell.QCImageButton.image = NSImage(contentsOfFile: image)
+        }
+        
         return cell
     }
+    
+    @objc func uploadImage() {
+        let openPanel = NSOpenPanel()
+        openPanel.allowedFileTypes = ["public.image"]
+        openPanel.allowsMultipleSelection = false
+        
+        openPanel.begin { [self] (response) in
+            if response == .OK, let fileURL = openPanel.url {
+                self.duplicateImage(to: fileURL)
+                
+                let newFile = fileURL.absoluteString.replacingOccurrences(of: "file://", with: "")
+                let questions = cardData["questions and answers"] as? [NSMutableDictionary]
+                questions?[tableView.selectedRow].setValue(newFile, forKey: "image")
+                
+                cardData.setObject(questions!, forKey: "questions and answers" as NSCopying)
+                tableView.reloadData()
+            }
+        }
+    }
+    
+    func duplicateImage(to sourceURL: URL) {
+        do {
+            let fileManager = FileManager.default
+            
+            // Create the destination folder if it doesn't exist
+            
+            let filePath = "file://" + self.path!.absoluteString
+            let filePathURL = URL(string: filePath)!
+            
+            let contentsURL = filePathURL.appendingPathComponent("Contents")
+            try fileManager.createDirectory(at: contentsURL, withIntermediateDirectories: true, attributes: nil)
+            
+            // Create a destination URL for the duplicated image
+            let destinationURL = contentsURL.appendingPathComponent(sourceURL.lastPathComponent)
+            
+            // Duplicate the image file
+            try fileManager.copyItem(at: sourceURL, to: destinationURL)
+        } catch {
+            print("Error duplicating image: \(error.localizedDescription)")
+        }
+    }
+    
     func control(_ control: NSControl, textShouldEndEditing fieldEditor: NSText) -> Bool {
         saveBTN()
         return true
@@ -140,74 +168,59 @@ class QCEditorViewController: NSViewController, NSTableViewDelegate, NSTableView
         saveBTN()
         return true
     }
+    
     func controlTextDidBeginEditing(_ obj: Notification) {
         saveBTN()
     }
+    
     func controlTextDidChange(_ obj: Notification) {
         saveBTN()
     }
+    
     func controlTextDidEndEditing(_ obj: Notification) {
         saveBTN()
     }
+    
     @objc func saveBTN() {
-        print("dsafasdf")
-        let infoListFile = path?.appendingPathComponent("card.plist")
-//        let cell = sender
         let cell = tableView.view(atColumn: 0, row: tableView.selectedRow, makeIfNecessary: true) as? QCEditorTableCellView
         
-        let dict = NSDictionary(contentsOfFile: infoListFile!.absoluteString) as! NSDictionary
-//        let cell = tableView.selectedCell() as? QCEditorTableCellView
-          let QCName = dict["questions and answers"] as? [NSMutableDictionary]
-        let QCNamee = dict["name"] as? String
-
-        dict.setValue(cardNameTextField.stringValue, forKey: "name")
+        let questions = cardData["questions and answers"] as? [NSMutableDictionary]
         
-        QCName?[tableView.selectedRow].setValue(cell!.QCQuestionTextField.stringValue, forKey: "question")
-        QCName?[tableView.selectedRow].setValue(cell!.QCAnswerTextField.stringValue, forKey: "answer")
-//        writePlistFile(infoListFile!, "question", data: "test")
+        cardData.setValue(cardNameTextField.stringValue, forKey: "name")
         
+        // Update the name on the plist file
+        updateName()
+        
+        questions?[tableView.selectedRow].setValue(cell!.QCQuestionTextField.stringValue, forKey: "question")
+        questions?[tableView.selectedRow].setValue(cell!.QCAnswerTextField.stringValue, forKey: "answer")
+    }
+    
+    func updateName() {
+        guard var cards = getCards(), index != -1 else { return }
+        cards.root[index].name = cardNameTextField.stringValue
+        
+        let pListFilURL = QCDataDir()?.appendingPathComponent("cards.plist")
+        
+        let encoder = PropertyListEncoder()
+        encoder.outputFormat = .xml
         do {
-            let sdfads = try! dict.write(toFile: infoListFile!.absoluteString, atomically: true)
-            try! dict.write(toFile: infoListFile!.absoluteString, atomically: true)
-//            try! dict.write(to: infoListFile!)
-            try! dict.write(to: infoListFile!, atomically: true)
-
-            if sdfads == true {
-            print("dsasadfalnsdflkasdnfasdf")
-            }
+            let data = try encoder.encode(cards)
+            try data.write(to: pListFilURL!)
         } catch {
-            print("adsfkjadsnfkjasndfkjasndfkjasndfkjsnckadsjnrvriuh8")
-            print(error.localizedDescription)
-
+            print("[Editor] updateName()", error.localizedDescription)
         }
     }
-    init(fileURL: URL?) {
-        super.init(nibName: "QCEditorViewController", bundle: nil)
+    
+    init(fileURL: URL?, _ index: Int = -1) {
         self.path = fileURL
+        self.index = index
+        self.infoListFile = fileURL!.appendingPathComponent("card.plist")
+        
+        cardData = .init()
+        super.init(nibName: "QCEditorViewController", bundle: nil)
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
 }
-
-public func writePlistFile(_ name: String, _ key: String, data: Any) {
-    let dataDir = QCDataDir()?.appendingPathComponent("\(name).plist")
-    if let dict = NSMutableDictionary(contentsOf: dataDir!) {
-        dict.setObject(data, forKey: key as NSCopying)
-        if dict.write(toFile: dataDir!.absoluteString, atomically: true) {
-            print("sucsess")
-        }
-    }
-}
-public func writePlistFile(_ url: URL, _ key: String, data: Any) {
-    let dataDir = url
-    if let dict = NSMutableDictionary(contentsOf: dataDir) {
-        dict.setObject(data, forKey: key as NSCopying)
-        if dict.write(toFile: dataDir.absoluteString, atomically: true) {
-            print("sucsess")
-        }
-    }
-}
-

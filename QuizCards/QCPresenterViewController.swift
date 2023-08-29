@@ -8,68 +8,103 @@
 import Cocoa
 
 class QCPresenterViewController: NSViewController, NSSharingServiceDelegate {
-
     @IBOutlet weak var questionLabel: NSTextField!
-    
     @IBOutlet weak var answerLabel: NSTextField!
+    @IBOutlet weak var imageView: NSImageView!
     
-    var path = URL(string: "sfds")
+    var path: URL
+    
+    // Questions and answers
+    var qaas: [NSDictionary] = []
+    var questionIndex: Int = 0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        reloadData()
-        // Do view setup here.
+        showQuestion()
     }
+    
     @IBAction func shareFile(_ sender: NSButton) {
-        let newURL = "\(path!)/"
+        let newURL = "\(path)/"
         let shareItems = [NSURL(fileURLWithPath: newURL)]
-//        let service = NSSharingService(named: .composeMessage)
-//        service?.delegate = self
-////        service?.recipients = ["/tim.cook@apple.com"]
-//        service?.subject = "\(NSLocalizedString("Re: Requested PDF", comment: ""))"
-//
-////        var sdfasd = URL(string: "")
-//        service?.perform(withItems: shareItems)
-        
-                NSSharingService.shareSocialData(content: shareItems, button: sender)
+        NSSharingService.shareSocialData(content: shareItems, button: sender)
     }
-
-//    override var acceptsFirstResponder: Bool { get { return true } }
-
+        
     func reloadData() {
-        answerLabel.isHidden = true
-
-        
-        let infoListFile = path?.appendingPathComponent("card.plist")
-        
-        let dict = NSDictionary(contentsOfFile: infoListFile!.absoluteString) as! [String: AnyObject]
-
-          if let QCName = dict["questions and answers"] as? [NSDictionary] {
-               print("Info.plist : \(QCName)")
-            let randomElement = QCName.randomElement()
-
-            print(QCName[0].object(forKey: "question"))
-            questionLabel.stringValue = randomElement!.object(forKey: "question") as! String
-            answerLabel.stringValue = randomElement!.object(forKey: "answer") as! String
-
-            //                QCName[0].object(forKey: "question") as! String
-            
-          }
-        
+        qaas.shuffle()
+        questionIndex = 0
     }
-    init(fileURL: URL?) {
-        super.init(nibName: "QCPresenterViewController", bundle: nil)
-        self.path = fileURL
+    
+    func showQuestion() {
+        hideAnswer()
+        
+        guard questionIndex < qaas.count else {
+            restart()
+            return
+        }
+
+        let question = qaas[questionIndex]
+        questionLabel.stringValue = question.object(forKey: "question") as! String
+        answerLabel.stringValue = question.object(forKey: "answer") as! String
+        
+        if let image = question.object(forKey: "image") as? String {
+            imageView.image = NSImage(contentsOfFile: image)
+        } else {
+            imageView.image = nil
+        }
+
+        
+        questionIndex += 1
     }
-    @IBAction func seeAnswer(_ sender: Any) {
+    
+    func showAnswer() {
         answerLabel.isHidden = false
-        
+        imageView.isHidden = false
     }
+    
+    func hideAnswer() {
+        answerLabel.isHidden = true
+        imageView.isHidden = true
+    }
+    
+    func restart() {
+        showAnswer()
+        
+        questionLabel.textColor = .green
+        answerLabel.textColor = .green
+        
+        questionLabel.stringValue = "Finished Quiz"
+        answerLabel.stringValue = "Shuffling Questions..."
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+            self.questionLabel.textColor = .labelColor
+            self.answerLabel.textColor = .labelColor
+            
+            self.reloadData()
+            self.showQuestion()
+        }
+    }
+    
+    init(fileURL: URL) {
+        self.path = fileURL
+        super.init(nibName: "QCPresenterViewController", bundle: nil)
+        
+        let infoListFile = path.appendingPathComponent("card.plist")
+        let dict = NSDictionary(contentsOfFile: infoListFile.absoluteString) as! [String: AnyObject]
+        self.qaas = dict["questions and answers"] as! [NSDictionary]
+        qaas.shuffle()
+    }
+    
+    @IBAction func seeAnswer(_ sender: Any) {
+        showAnswer()
+    }
+    
     @IBAction func closeButton(_ sender: Any) {
         self.view.window?.close()
     }
+    
     @IBAction func choseNext(_ sender: Any) {
-        reloadData()
+        showQuestion()
     }
     
     required init?(coder: NSCoder) {
@@ -77,10 +112,11 @@ class QCPresenterViewController: NSViewController, NSSharingServiceDelegate {
     }
     
 }
-extension NSSharingService {
-class func shareSocialData ( content: [AnyObject], button: NSButton ) {
-    let sharingServicePicker = NSSharingServicePicker (items: content )
 
-    sharingServicePicker.show(relativeTo: button.bounds, of: button, preferredEdge: NSRectEdge.maxX)
-}
+extension NSSharingService {
+    class func shareSocialData ( content: [AnyObject], button: NSButton ) {
+        let sharingServicePicker = NSSharingServicePicker (items: content )
+        
+        sharingServicePicker.show(relativeTo: button.bounds, of: button, preferredEdge: NSRectEdge.maxX)
+    }
 }
